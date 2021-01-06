@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import '../services/location.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -10,24 +10,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    print(getLocation());
+    getLocation();
   }
 
-  Future<Position> getLocation() async {
-    bool serviceEnabled = true;
-    LocationPermission permission;
-    if (!serviceEnabled) {
-      return Future.error(
-          "location services are Disabled, please turn them on");
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.checkPermission();
-    }
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    return position;
+  getLocation() async {
+    LocationHandler locationHandler = new LocationHandler();
+    await locationHandler.getLocation();
+    print(
+        "latitude is: ${locationHandler.latitude} longitude is: ${locationHandler.longitude}");
   }
 
   @override
@@ -35,7 +25,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Scaffold(
       body: Center(
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.purple),
+          strokeWidth: 10.0,
+          backgroundColor: Colors.red,
         ),
       ),
     );
