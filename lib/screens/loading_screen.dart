@@ -7,6 +7,12 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    print(getLocation());
+  }
+
   Future<Position> getLocation() async {
     bool serviceEnabled = true;
     LocationPermission permission;
@@ -21,7 +27,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
-    print(position);
     return position;
   }
 
@@ -29,11 +34,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            getLocation();
-          },
-          child: Text('Get Location'),
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
         ),
       ),
     );
