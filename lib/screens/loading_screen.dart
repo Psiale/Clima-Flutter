@@ -17,17 +17,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    var weatherObject = getLocationData();
-    // LocationScreen locationScreen = new LocationScreen();
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => LocationScreen(
-                    locationWeather: weatherObject,
-                  )),
-          (_) => false);
-    });
+    getLocationData();
   }
 
   getLocationData() async {
@@ -43,6 +33,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     var weatherData = await httpRequest.fetchWeather();
 
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => LocationScreen(
+                    locationWeather: weatherData,
+                  )),
+          (_) => false);
+    });
+
     return weatherData;
   }
 
@@ -50,7 +50,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SpinKitCubeGrid(
+        child: SpinKitPouringHourglass(
           color: Colors.purple,
           size: 100.0,
         ),

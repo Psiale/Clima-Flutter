@@ -18,7 +18,7 @@ class LocationHandler {
     }
     try {
       position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.low);
+          desiredAccuracy: LocationAccuracy.high);
     } catch (e) {
       Future.error(e);
       return e;
