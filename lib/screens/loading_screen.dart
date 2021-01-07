@@ -17,12 +17,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    // var weatherObject = getLocationData();
+    var weatherObject = getLocationData();
     // LocationScreen locationScreen = new LocationScreen();
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => LocationScreen()),
+          MaterialPageRoute(
+              builder: (context) => LocationScreen(
+                    locationWeather: weatherObject,
+                  )),
           (_) => false);
     });
   }
