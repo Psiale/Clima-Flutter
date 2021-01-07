@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../services/location.dart';
 import '../services/networking.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'location_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -17,7 +19,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     super.initState();
     // var weatherObject = getLocationData();
     // LocationScreen locationScreen = new LocationScreen();
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 3), () {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => LocationScreen()),
@@ -45,10 +47,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.purple),
-          strokeWidth: 10.0,
-          backgroundColor: Colors.red,
+        child: SpinKitCubeGrid(
+          color: Colors.purple,
+          size: 100.0,
         ),
       ),
     );
