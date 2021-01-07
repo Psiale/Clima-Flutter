@@ -14,25 +14,21 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    getLocation();
-    print(getWeather(latitude, longitude));
+    getLocationData();
   }
 
-  getLocation() async {
+  getLocationData() async {
     LocationHandler locationHandler = new LocationHandler();
     await locationHandler.getLocation();
-    print(
-        "latitude is: ${locationHandler.latitude} longitude is: ${locationHandler.longitude}");
     latitude = locationHandler.latitude;
     longitude = locationHandler.longitude;
-  }
 
-  getWeather(lat, lon) async {
+    print("latitude is: $latitude longitude is: $longitude");
+
     HTTPRequest httpRequest = HTTPRequest(
-        "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey");
-    var response = await httpRequest.fetchWeather(lat, lon);
-    print(response);
-    return response;
+        "https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey");
+
+    var weatherData = await httpRequest.fetchWeather();
   }
 
   @override
