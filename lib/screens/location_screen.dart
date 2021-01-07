@@ -1,3 +1,4 @@
+import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 
@@ -15,6 +16,7 @@ class _LocationScreenState extends State<LocationScreen> {
   double temperature;
   int condition;
   String cityName;
+  WeatherModel weatherModel = new WeatherModel();
 
   @override
   void initState() {
@@ -70,7 +72,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      "${temperature.round()}",
+                      "${temperature.toInt()} ",
                       style: kTempTextStyle,
                     ),
                     Text(
@@ -83,7 +85,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in $cityName",
+                  "It's ${weatherModel.getWeatherIcon(condition)} time in $cityName",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
