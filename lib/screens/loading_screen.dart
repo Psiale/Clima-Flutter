@@ -8,25 +8,27 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double longitude;
+  double latitude;
+  final String apiKey = '55b9e2fc241864ad1805c87262e98f50';
   @override
   void initState() {
     super.initState();
-    print(getWeather());
+    getLocationData();
   }
 
-  getLocation() async {
+  getLocationData() async {
     LocationHandler locationHandler = new LocationHandler();
     await locationHandler.getLocation();
-    print(
-        "latitude is: ${locationHandler.latitude} longitude is: ${locationHandler.longitude}");
-    return locationHandler;
-  }
+    latitude = locationHandler.latitude;
+    longitude = locationHandler.longitude;
 
-  getWeather() async {
-    HTTPRequest httpRequest = HTTPRequest();
-    var response = await httpRequest.fetchWeather(getLocation());
-    print(response);
-    return response;
+    print("latitude is: $latitude longitude is: $longitude");
+
+    HTTPRequest httpRequest = HTTPRequest(
+        "https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey");
+
+    var weatherData = await httpRequest.fetchWeather();
   }
 
   @override
