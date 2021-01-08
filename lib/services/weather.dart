@@ -1,3 +1,11 @@
+import 'package:clima/screens/location_screen.dart';
+import '../services/location.dart';
+import '../services/networking.dart';
+import 'package:flutter/material.dart';
+
+const String apiKey = '55b9e2fc241864ad1805c87262e98f50';
+const String url = "https://api.openweathermap.org/data/2.5/weather";
+
 class WeatherModel {
   String getWeatherIcon(int condition) {
     if (condition < 300) {
@@ -29,5 +37,22 @@ class WeatherModel {
     } else {
       return 'Bring a 🧥 just in case';
     }
+  }
+
+  getLocationWeather(BuildContext context) async {
+    LocationHandler locationHandler = new LocationHandler();
+    await locationHandler.getLocation();
+
+    print(
+        "latitude is: ${locationHandler.latitude} longitude is: ${locationHandler.longitude}");
+
+    HTTPRequest httpRequest = HTTPRequest(
+        "$url?lat=${locationHandler.latitude}&lon=${locationHandler.longitude}&appid=$apiKey");
+
+    var weatherData = await httpRequest.fetchWeather();
+
+
+
+    return weatherData;
   }
 }
