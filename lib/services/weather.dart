@@ -1,4 +1,3 @@
-import 'package:clima/screens/location_screen.dart';
 import '../services/location.dart';
 import '../services/networking.dart';
 import 'package:flutter/material.dart';
@@ -47,11 +46,9 @@ class WeatherModel {
         "latitude is: ${locationHandler.latitude} longitude is: ${locationHandler.longitude}");
 
     HTTPRequest httpRequest = HTTPRequest(
-        "$url?lat=${locationHandler.latitude}&lon=${locationHandler.longitude}&appid=$apiKey");
+        "$url?lat=${locationHandler.latitude}&lon=${locationHandler.longitude}&units=metric&appid=$apiKey");
 
     var weatherData = await httpRequest.fetchWeather();
-
-
 
     return weatherData;
   }

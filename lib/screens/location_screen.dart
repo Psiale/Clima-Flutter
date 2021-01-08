@@ -14,7 +14,7 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   var weatherData;
-  double temperature;
+  var temperature;
   int condition;
   String cityName;
   String weatherMessage;
@@ -93,7 +93,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      "${temperature.toInt()} ",
+                      "${temperature.round()}°C ",
                       style: kTempTextStyle,
                     ),
                     Text(
