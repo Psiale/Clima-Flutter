@@ -2,6 +2,7 @@ import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 import 'city_screen.dart';
+import 'package:screenshot_share_image/screenshot_share_image.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({this.locationWeather});
@@ -42,6 +43,14 @@ class _LocationScreenState extends State<LocationScreen> {
     });
   }
 
+  Future takeScreenShot() async {
+    Future.delayed(Duration(seconds: 1), () {
+      ScreenshotShareImage.takeScreenshotShareImage();
+    });
+
+    if (!mounted) return;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +66,6 @@ class _LocationScreenState extends State<LocationScreen> {
         constraints: BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Row(
@@ -89,7 +97,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
+                padding: EdgeInsets.fromLTRB(15.0, 15.0, 0, 0),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -111,6 +119,20 @@ class _LocationScreenState extends State<LocationScreen> {
                   style: kMessageTextStyle,
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child: Center(
+                  child: FlatButton(
+                    onPressed: () {
+                      takeScreenShot();
+                    },
+                    child: Icon(
+                      Icons.share,
+                      size: 60.0,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
