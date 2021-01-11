@@ -17,15 +17,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   getLocationData(context) async {
     var weatherData = await WeatherModel().getLocationWeather(context);
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => LocationScreen(
-                  locationWeather: weatherData,
-                )),
-      );
-    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => LocationScreen(
+                locationWeather: weatherData,
+              )),
+    );
   }
 
   @override
@@ -33,7 +31,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Scaffold(
       body: Center(
         child: SpinKitDoubleBounce(
-          color: Colors.pink,
+          color: Colors.yellow,
           size: 100.0,
         ),
       ),

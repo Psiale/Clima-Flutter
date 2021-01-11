@@ -22,3 +22,15 @@ const kConditionTextStyle = TextStyle(
 const kshareIconTextStyle = TextStyle(
   fontSize: 60.0,
 );
+
+const kInputTextDecoration = InputDecoration(
+    hintText: 'search for a city',
+    hintStyle: TextStyle(color: Colors.grey),
+    fillColor: Colors.white,
+    filled: true,
+    border: OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: const BorderRadius.all(Radius.circular(10.0))),
+    contentPadding: EdgeInsets.all(16.0),
+    isCollapsed: true,
+    icon: Icon(Icons.location_city, color: Colors.white));

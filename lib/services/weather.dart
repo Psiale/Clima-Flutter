@@ -52,4 +52,11 @@ class WeatherModel {
 
     return weatherData;
   }
+
+  Future<dynamic> getLocationByCity(cityName) async {
+    HTTPRequest httpRequest =
+        HTTPRequest("$url?q=$cityName&appid=$apiKey&units=metric");
+    var weatherData = await httpRequest.fetchWeather();
+    return weatherData;
+  }
 }
