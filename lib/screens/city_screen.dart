@@ -35,7 +35,21 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child: null,
+                child: TextField(
+                  style: TextStyle(
+                    color: Colors.green,
+                  ),
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10.0))),
+                      contentPadding: EdgeInsets.all(16.0),
+                      isCollapsed: true,
+                      labelText: 'search for a city',
+                      icon: Icon(Icons.location_city)),
+                ),
               ),
               FlatButton(
                 onPressed: () {},
