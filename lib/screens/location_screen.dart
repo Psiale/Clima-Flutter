@@ -1,6 +1,8 @@
 import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'city_screen.dart';
+import 'package:screenshot_share_image/screenshot_share_image.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({this.locationWeather});
@@ -13,9 +15,10 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   var weatherData;
-  double temperature;
+  var temperature;
   int condition;
   String cityName;
+  String weatherMessage;
   WeatherModel weatherModel = new WeatherModel();
 
   @override
@@ -25,9 +28,27 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   updateUI(weatherData) {
-    cityName = weatherData['name'];
-    condition = weatherData['weather'][0]['id'];
-    temperature = weatherData['main']['temp'];
+    setState(() {
+      if (weatherData == null) {
+        cityName = '';
+        condition = 0;
+        temperature = 0;
+        weatherMessage = "please turn on your location";
+        return;
+      }
+      cityName = weatherData['name'];
+      condition = weatherData['weather'][0]['id'];
+      temperature = weatherData['main']['temp'];
+      weatherMessage = weatherModel.getMessage(temperature.toInt());
+    });
+  }
+
+  Future takeScreenShot() async {
+    Future.delayed(Duration(seconds: 1), () {
+      ScreenshotShareImage.takeScreenshotShareImage();
+    });
+
+    if (!mounted) return;
   }
 
   @override
@@ -45,21 +66,34 @@ class _LocationScreenState extends State<LocationScreen> {
         constraints: BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weatherData =
+                          await weatherModel.getLocationWeather(context);
+                      updateUI(weatherData);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
                     ),
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var cityName = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CityScreen()));
+                      if (cityName != null) {
+                        var weatherData =
+                            await weatherModel.getLocationByCity(cityName);
+                        updateUI(weatherData);
+                      }
+                    },
                     child: Icon(
                       Icons.location_city,
                       size: 50.0,
@@ -68,11 +102,11 @@ class _LocationScreenState extends State<LocationScreen> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
+                padding: EdgeInsets.fromLTRB(15.0, 15.0, 0, 0),
                 child: Row(
                   children: <Widget>[
                     Text(
-                      "${temperature.toInt()} ",
+                      "${temperature.round()}°C ",
                       style: kTempTextStyle,
                     ),
                     Text(
@@ -85,11 +119,25 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  " ${weatherModel.getMessage(temperature.toInt())} time in $cityName",
+                  " $weatherMessage in $cityName",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child: Center(
+                  child: FlatButton(
+                    onPressed: () {
+                      takeScreenShot();
+                    },
+                    child: Icon(
+                      Icons.share,
+                      size: 60.0,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
