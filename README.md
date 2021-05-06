@@ -1,34 +1,46 @@
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
+# Weather APP 🌤️🌎
+
+This project is part of a series of projects to be completed by students of the [AppBrewery](https://www.appbrewery.co/p/flutter-development-bootcamp-with-dart) flutter course.
+
+This project focuses on Fetching Weather APP information from the OpenWeather API according to the user location.
+
+## Preview
+
+![App preview](./assets/app_preview.gif)
+
+## 🧮 The Project Brief
+
+The premise of this project is to learn how to access an user for permissions, location permission for this particular project, in order to give the user weather information.
+
+## 🎯 Features
+
+* The users sees a loading animation while on the background the app it's fetching the Climate information for his location.
+## 🧬 Technologies & Languages Used
+
+- Dart
+- Flutter
+- Github
 
 
-# Clima ☁
+## 🛎️ Contributions, Issues & Forking
 
-## Our Goal
+If you have any issues setting up the project or you come across any unintended bugs or problems, please do submit an issue to the [Weather APP ](https://github.com/Psiale/Clima-Flutter/tree/feature/customSpinner/issues) page.
 
-The objective of this tutorial is to learn about asynchronous programming in Dart. We'll look at how to carry out time consuming tasks such as getting device location and networking to get data from the internet. 
+If you want to make your own changes, modifications or improvements to our project, go ahead and Fork it!
+1. [Fork it](https://github.com/Psiale/Clima-Flutter/tree/feature/customSpinner/fork)
 
+2. Create your working branch (git checkout -b [choose-a-name])
 
-## What you will create
+3. Commit your changes (git commit -m 'what this commit will fix/add/improve')
+4. Push to the branch (git push origin [chosen-name])
+5. Create a new Pull Request
 
-We’re going to make a weather app inspired by the beautiful designs made by [Olia Gozha](https://dribbble.com/shots/4663154-). By the end of the module, you'll be able to find out the live weather data in the current location of the device as well as the weather for any city you can think of!
+## 🤟🏽😄 😛🤙🏾  Creator
 
-![Finished App](https://github.com/londonappbrewery/Images/blob/master/clima-demo.gif)
+Alexis Sanchez 
+- [Github](https://github.com/Psiale)
+- [Linkedin](https://www.linkedin.com/in/alexis-sanchez-dev/)
 
-## What you will learn
+## 🙌🏾 Show Your Support
 
-- How to use Dart to perform asynchronous tasks.
-- Understand async and await.
-- Learn about Futures and how to work with them.
-- How to network with the Dart http package.
-- What APIs are and how to use them to get data from the internet.
-- What JSONs are and how to parse them using the Dart convert package.
-- How to pass data forwards and backwards between screens using the Navigator.
-- How to handle exceptions in Dart using try/catch/throw.
-- Learn about the lifecycle of Stateful Widgets and how to override them.
-- How to use the Geolocator package to get live location data for both iOS and Android.
-- How to use the TextField Widget to take user input.
-
-
->This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
-
-![End Banner](https://github.com/londonappbrewery/Images/blob/master/readme-end-banner.png)
+Give a ⭐️ if you like this project!
